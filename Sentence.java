@@ -19,11 +19,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
-
-
-
 public class Sentence {
-    
         private String text;
         private String author;
         private String timestamp;
@@ -68,21 +64,15 @@ public class Sentence {
         }
 
         public static Sentence convertLine(String line) {
-
                 ArrayList<String> pieces = new ArrayList<>();
                 String store = "";
                 boolean seen = false;
                 int letter = 0;
                 int index = 0;
-
-                
                 while (letter < line.length()) {
-                        
-
                         if (line.charAt(letter) == '\"') {
                                 seen = !seen;
                         }
-            
                         if (seen == false && index < 7) {
                                 if (line.charAt(letter) == ',') {
                                         pieces.add(store);
@@ -94,13 +84,9 @@ public class Sentence {
                         } else {
                                 store += line.charAt(letter);
                         }
-            
                         letter++;
-                        
                 }
                 
-  
-
                 pieces.add(store);
                 String date = pieces.get(2);
                 String username = pieces.get(4);
@@ -113,24 +99,17 @@ public class Sentence {
                 tweet = tweet.replaceAll("\\!", "").replaceAll("\\@", "").replaceAll("\\$", "");
                 tweet = tweet.replaceAll("\\%", "").replaceAll("\\^", "").replaceAll("\\&", "");
                 tweet = tweet.replaceAll("\\*", "").replaceAll("\\)", "").replaceAll("\\(", "");
-               
-                
-
+            
                 //System.out.println(date);
                 String[] dateParts = date.split("/");
                 int month = Integer.parseInt(dateParts[0]);
                 String[] months = {"", "January", "February", "March", "April", "May", 
                         "June", "July", "August", "September", "October", "November", "December"};
                 String monthName = months[month];
-
                 dateParts[2] = "2020";
-                
                 String finalDate = monthName + " " + dateParts[1] + " " + dateParts[2];
-
                 return new Sentence(tweet, username, finalDate);
         }
-
-
 
         public ArrayList<String> splitSentence() {
                 String[] stopwords = {"a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "aren't", 
@@ -152,19 +131,16 @@ public class Sentence {
 
                 ArrayList <String> stopwordsList = new ArrayList<>(Arrays.asList(stopwords));
 
-                
                 for (int i = 0; i < word.length; i++) {
                         if (!stopwordsList.contains(word[i])) {
                             words.add(word[i]);
                         }
-                    }
-
+                }
                 return words;
-                
         }
 
         public int getSentiment(){
-                
+            
                 String tweet = this.text;
                 Properties props = new Properties();
                 props.setProperty("annotators", "tokenize, ssplit, pos, parse, sentiment");
@@ -192,7 +168,7 @@ public class Sentence {
                         Date date = formatter.parse(timestamp);
                         Timestamp timeStampDate = new Timestamp(date.getTime());
 
-                    // Check if the sentence date is within the specified range
+                    //check if the sentence date is within the specified range
                     Timestamp startTimestamp =new Timestamp(formatter.parse(startDateString).getTime());
                     Timestamp endTimestamp= new Timestamp(formatter.parse(endDateString).getTime());  
                     if (timeStampDate.after(startTimestamp) && timeStampDate.before(endTimestamp)) {
@@ -202,7 +178,6 @@ public class Sentence {
                        //System.out.println("Date is NOT within the range.");
                         return false;
                     }
-                
                 } catch (ParseException e) {
                     e.printStackTrace();
                     System.out.println("Exception :" + e);
