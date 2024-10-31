@@ -4,7 +4,7 @@ Included is the code and imported libraries for my sentiment analyzer:
 
 Unfortunately the "stanford-english-corenlp-2018-10-05-models" cannot be uploaded to the repository due to githubs maximum file capacity. Even with LFS installed, github still won't allow the upload without purchasing extra storage.
 
-The sentence class contains the code necessary to break down each individual tweet while the driver class contains the code necessary to run the tweets from the "Covid-19 Twitter Dataset (Apr-Jun 2020)".
+The "Sentence.java" class contains the code necessary to break down each individual tweet while the "Driver.java" class contains the code necessary to run the tweets from the "Covid-19 Twitter Dataset (Apr-Jun 2020)".
 
 You can analyze the changing sentiment by modifying the "temporalRange" string in the Sentence.java class inside the "keep" method at the bottom of the class.
 By modifying the range I was able to analyze the changing sentiment towards the virus and understand the most commonly used terms during each week/month to understand the changing public perception.
